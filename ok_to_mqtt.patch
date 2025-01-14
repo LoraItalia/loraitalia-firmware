@@ -1,0 +1,15 @@
+diff --git a/src/mqtt/MQTT.cpp b/src/mqtt/MQTT.cpp
+index f642af23..3c5fad27 100644
+--- a/src/mqtt/MQTT.cpp
++++ b/src/mqtt/MQTT.cpp
+@@ -627,8 +627,8 @@ void MQTT::onSend(const meshtastic_MeshPacket &mp_encrypted, const meshtastic_Me
+         if (!isFromUs(&mp_decoded) && !isMqttServerAddressPrivate && dontUplink &&
+             (ch.settings.psk.size < 2 || (ch.settings.psk.size == 16 && memcmp(ch.settings.psk.bytes, defaultpsk, 16)) ||
+              (ch.settings.psk.size == 32 && memcmp(ch.settings.psk.bytes, eventpsk, 32)))) {
+-            LOG_INFO("MQTT onSend - Not forwarding packet due to DontMqttMeBro flag");
+-            return;
++            LOG_INFO("MQTT onSend - Not forwarding packet even if it has DontMqttMeBro flag");
++            //return; //commenting this out makes it possible to continue processing the packet even if it has dontmqtt flag
+         }
+ 
+         if (isConfiguredForDefaultServer && (mp_decoded.decoded.portnum == meshtastic_PortNum_RANGE_TEST_APP ||
