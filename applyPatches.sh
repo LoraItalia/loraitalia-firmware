@@ -3,7 +3,7 @@
 # Funzione per validare il formato del tag
 validate_tag() {
     local tag="$1"
-    if [[ "$tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+\.([a-z0-9]{8})$ ]]; then
+    if [[ "$tag" =~ ^v[0-9]+\.[0-9]+\.[0-9][0-9]+\.([a-z0-9]{7})$ ]]; then
         return 0
     else
         return 1
