@@ -31,7 +31,7 @@ fi
 git checkout patches -- *.patch
 
 # Verifica se ci sono file .patch
-if [[ ! -e *.patch ]]; then
+if ! ls *.patch >/dev/null 2>&1; then
     echo "Nessun file .patch trovato."
     exit 1
 fi
