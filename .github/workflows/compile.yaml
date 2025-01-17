@@ -3,6 +3,10 @@ name: PlatformIO CI
 on:
   workflow_dispatch:
     inputs:
+      tag:
+        description: 'specify firmware version tag'
+        required: true
+        type: string
       ftpTarget:
         description: 'specify firmware target on FTP Server'
         default: '/'
@@ -34,9 +38,9 @@ jobs:
               return 1
             fi
           }    
-          if validate_tag "${{ github.ref }}"; then
-            echo "Tag is valid"
-          else
-            echo "Tag is not valid"
+          if ! validate_tag "${{ inputs.tag }}"; then
+            echo "Errore: il tag '$tag' non è valido. Deve rispettare il formato v2.5.19.d5cd6f8."
             exit 1
+          else
+            echo "Il tag '${{ inputs.tag }}' è valido."
           fi
