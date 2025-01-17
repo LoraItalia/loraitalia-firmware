@@ -47,7 +47,7 @@ jobs:
 
       - name: Checkout Code for Target Tag
         run: |
-          git fetch origin "refs/tags/${{ inputs.tag }}:refs/tags/${{ inputs.tag }}"
+          git fetch origin "tags/${{ inputs.tag }}:tags/${{ inputs.tag }}"
           git checkout "tags/${{ inputs.tag }}"
 
       - name: Checkout Patch Files
