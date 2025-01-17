@@ -69,3 +69,66 @@ jobs:
               exit 1
             fi
           done
+      
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio
+          
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Read version from file
+        id: get_version
+        run: |
+          version=$(grep -oP '(?<=major = )\d+' version.properties).$(grep -oP '(?<=minor = )\d+' version.properties).$(grep -oP '(?<=build = )\d+' version.properties)
+          commit_hash=$(git rev-parse --short HEAD)
+          echo "VERSION_TAG=$version-$commit_hash" >> $GITHUB_ENV
+
+      - name: Install PlatformIO Core
+        run: pip install --upgrade platformio
+
+      - name: Build PlatformIO Project
+        run: pio run
+
+      - name: Create folder with builds
+        run: |
+          mkdir artifacts
+          mkdir artifacts/firmware-${{ env.VERSION_TAG }}
+          mkdir artifacts/firmware-${{ env.VERSION_TAG }}/tbeam
+          mkdir artifacts/firmware-${{ env.VERSION_TAG }}/rak4631
+          mkdir artifacts/firmware-${{ env.VERSION_TAG }}/heltec-v3
+          mkdir artifacts/firmware-${{ env.VERSION_TAG }}/tlora-v2-1-1_6
+          mkdir artifacts/firmware-${{ env.VERSION_TAG }}/t-echo
+          mkdir artifacts/firmware-${{ env.VERSION_TAG }}/heltec-mesh-node-t114
+          cp .pio/build/tbeam/firmware.bin artifacts/firmware-${{ env.VERSION_TAG }}/tbeam/firmware.${{ env.VERSION_TAG }}.update.bin
+          cp .pio/build/tbeam/firmware.factory.bin artifacts/firmware-${{ env.VERSION_TAG }}/tbeam/firmware.${{ env.VERSION_TAG }}.factory.bin
+          cp .pio/build/rak4631/firmware.uf2 artifacts/firmware-${{ env.VERSION_TAG }}/rak4631/firmware.${{ env.VERSION_TAG }}.uf2
+          cp .pio/build/rak4631/firmware.zip artifacts/firmware-${{ env.VERSION_TAG }}/rak4631/firmware.${{ env.VERSION_TAG }}.zip
+          cp .pio/build/tlora-v2-1-1_6/firmware.bin artifacts/firmware-${{ env.VERSION_TAG }}/tlora-v2-1-1_6/firmware.${{ env.VERSION_TAG }}.update.bin
+          cp .pio/build/tlora-v2-1-1_6/firmware.factory.bin artifacts/firmware-${{ env.VERSION_TAG }}/tlora-v2-1-1_6/firmware.${{ env.VERSION_TAG }}.factory.bin
+          cp .pio/build/heltec-v3/firmware.bin artifacts/firmware-${{ env.VERSION_TAG }}/heltec-v3/firmware.${{ env.VERSION_TAG }}.update.bin
+          cp .pio/build/heltec-v3/firmware.factory.bin artifacts/firmware-${{ env.VERSION_TAG }}/heltec-v3/firmware.${{ env.VERSION_TAG }}.factory.bin
+          cp .pio/build/t-echo/firmware.uf2 artifacts/firmware-${{ env.VERSION_TAG }}/t-echo/firmware.${{ env.VERSION_TAG }}.uf2
+          cp .pio/build/t-echo/firmware.zip artifacts/firmware-${{ env.VERSION_TAG }}/t-echo/firmware.${{ env.VERSION_TAG }}.zip
+          cp .pio/build/heltec-mesh-node-t114/firmware.uf2 artifacts/firmware-${{ env.VERSION_TAG }}/heltec-mesh-node-t114/firmware.${{ env.VERSION_TAG }}.uf2
+          cp .pio/build/heltec-mesh-node-t114/firmware.zip artifacts/firmware-${{ env.VERSION_TAG }}/heltec-mesh-node-t114/firmware.${{ env.VERSION_TAG }}.zip
+
+      - name: Upload FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: "artifacts/"
+          server-dir: "/"
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Releases
+          path: |
+            artifacts/*
