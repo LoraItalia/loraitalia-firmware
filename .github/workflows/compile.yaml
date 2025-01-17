@@ -58,3 +58,14 @@ jobs:
         run: |
           git fetch origin "refs/tags/patches-${{ inputs.tag }}:refs/tags/patches-${{ inputs.tag }}"
           git checkout "patches-${{ inputs.tag }}" -- *.patch
+
+      - name: Apply Patches
+        run: |
+          for patch in *.patch; do
+            if git apply "$patch"; then
+              echo "Patch $patch applicato con successo."
+            else
+              echo "Errore: il patch $patch non è applicabile."
+              exit 1
+            fi
+          done
