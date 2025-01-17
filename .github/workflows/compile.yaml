@@ -1,0 +1,42 @@
+name: PlatformIO CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      ftpTarget:
+        description: 'specify firmware target on FTP Server'
+        default: '/'
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Validate tag
+        run: |
+          validate_tag() {
+            local tag="$1"
+            if [[ "$tag" =~ ^v[0-9]+\.[0-9]+\.[0-9][0-9]+\.([a-z0-9]{7})$ ]]; then
+              return 0
+            else
+              return 1
+            fi
+          }    
+          if validate_tag "${{ github.ref }}"; then
+            echo "Tag is valid"
+          else
+            echo "Tag is not valid"
+            exit 1
+          fi
