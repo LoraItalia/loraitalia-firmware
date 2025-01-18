@@ -134,9 +134,6 @@ jobs:
           localDir: "artifacts/"
           remoteDir: "/"
 
-      # - name: Upload Artifacts
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: Releases
-      #     path: |
-      #       artifacts/*
+      - name: Trigger Fw move
+        run: |
+          curl -X GET https://www.loraitalia.it/movefw.php
