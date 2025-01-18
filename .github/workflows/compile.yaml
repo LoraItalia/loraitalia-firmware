@@ -8,8 +8,9 @@ on:
         required: true
         type: choice
         options: 
-        - v2.5.15.79da236
         - v2.5.19.f9876cf
+        - v2.5.18.89ebafc
+        - v2.5.15.79da236
 
 jobs:
   build:
