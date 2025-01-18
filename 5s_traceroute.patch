@@ -1,9 +1,9 @@
 diff --git a/src/mesh/PhoneAPI.cpp b/src/mesh/PhoneAPI.cpp
-index 6789acbb..62a6ca35 100644
+index 20421e73..52b1e5a6 100644
 --- a/src/mesh/PhoneAPI.cpp
 +++ b/src/mesh/PhoneAPI.cpp
-@@ -637,7 +637,7 @@ bool PhoneAPI::handleToRadioPacket(meshtastic_MeshPacket &p)
-         }
+@@ -622,7 +622,7 @@ bool PhoneAPI::handleToRadioPacket(meshtastic_MeshPacket &p)
+ #endif
  
      if (p.decoded.portnum == meshtastic_PortNum_TRACEROUTE_APP && lastPortNumToRadio[p.decoded.portnum] &&
 -        Throttle::isWithinTimespanMs(lastPortNumToRadio[p.decoded.portnum], THIRTY_SECONDS_MS)) {
