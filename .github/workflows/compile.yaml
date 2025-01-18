@@ -10,11 +10,6 @@ on:
         options: 
         - v2.5.15.79da236
         - v2.5.19.f9876cf
-      ftpTarget:
-        description: 'specify firmware target on FTP Server'
-        default: '/'
-        required: true
-        type: string
 
 jobs:
   build:
@@ -129,9 +124,18 @@ jobs:
           local-dir: "artifacts/"
           server-dir: "${{ inputs.ftpTarget }}"
 
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload FTP
+        uses: sebastianpopp/ftp-action@releases/v2
         with:
-          name: Releases
-          path: |
-            artifacts/*
+          host: ${{ secrets.FTP_HOST }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          localDir: "artifacts/"
+          remoteDir: "/"
+
+      # - name: Upload Artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: Releases
+      #     path: |
+      #       artifacts/*
