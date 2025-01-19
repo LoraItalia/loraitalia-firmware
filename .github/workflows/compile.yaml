@@ -11,9 +11,30 @@ on:
         - v2.5.19.f9876cf
         - v2.5.18.89ebafc
         - v2.5.15.79da236
-      boolean:
+      traceroute5s:
         type: boolean
-        description: True or False
+        description: Reduce traceroute wait between retries to 5 seconds (instead of 30)
+        default: 'true'
+      mqttsettings:
+        type: boolean
+        description: Use default (LoraItalia) MQTT topic
+      remotehardware:
+        type: boolean
+        description: Compile with support for remote hardware module
+      loraitalianameslogos:
+        type: boolean
+        description: Use LoraItalia name and logos instead of default ones
+      mqttneighbortimings:
+        type: boolean
+        description: Use LoraItalia defined MQTT server and neighborinfo timings
+      neighborinfo:
+        type: boolean
+        description: Enable neighborinfo via LoRa also on primary channel
+      oktomqtt:
+        type: boolean
+        description: Enable OKTOMQTT patch
+      
+      
 
 jobs:
   build:
