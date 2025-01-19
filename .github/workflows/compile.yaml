@@ -11,6 +11,11 @@ on:
         - v2.5.19.f9876cf
         - v2.5.18.89ebafc
         - v2.5.15.79da236
+    debug_mode:
+      description: "Enable OKTOMQTT patch"
+      type: boolean
+      required: false
+      default: true
 
 jobs:
   build:
