@@ -14,7 +14,7 @@ on:
     debug_mode:
       description: "Enable OKTOMQTT patch"
       type: boolean
-      required: false
+      required: true
       default: true
 
 jobs:
