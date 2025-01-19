@@ -108,8 +108,7 @@ jobs:
 
       - name: Copy compiled binaries
         run: |
-          IFS=', '
-          for board in ${{ inputs.boards }}; do
+          for board in $(echo "${{ inputs.boards }}" | tr ',' ' '); do
             mkdir artifacts/firmware-${{ env.VERSION_TAG }}/$board
             cp .pio/build/$board/firmware.bin artifacts/firmware-${{ env.VERSION_TAG }}/$board/firmware.${{ env.VERSION_TAG }}.update.bin || true
             cp .pio/build/$board/firmware.factory.bin artifacts/firmware-${{ env.VERSION_TAG }}/$board/firmware.${{ env.VERSION_TAG }}.factory.bin || true
