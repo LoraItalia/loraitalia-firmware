@@ -74,7 +74,7 @@ jobs:
           done
 
       - name: Add boards
-        run: sed -i "/^default_envs =/c\default_envs = ${{inputs.boards}}" platformio.ini
+        run: sed -i "/^default_envs =/c\default_envs = ${{ inputs.boards }}" platformio.ini
 
       
       - uses: actions/cache@v4
@@ -108,8 +108,8 @@ jobs:
 
       - name: Copy compiled binaries
         run: |
-          IFS=', ' read -r -a board_array <<< "$BOARDS"
-          for board in "${board_array[@]}"; do
+          IFS=', '
+          for board in ${{ inputs.boards }}; do
             mkdir artifacts/firmware-${{ env.VERSION_TAG }}/$board
             cp .pio/build/$board/firmware.bin artifacts/firmware-${{ env.VERSION_TAG }}/$board/firmware.${{ env.VERSION_TAG }}.update.bin || true
             cp .pio/build/$board/firmware.factory.bin artifacts/firmware-${{ env.VERSION_TAG }}/$board/firmware.${{ env.VERSION_TAG }}.factory.bin || true
