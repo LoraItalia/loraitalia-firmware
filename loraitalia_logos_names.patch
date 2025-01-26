@@ -81,3 +81,16 @@ index 4e78ae8a..1f17b4d2 100644
    0x00, 0x00, 0x00, 0x00, };
  #endif
 \ No newline at end of file
+diff --git a/src/main.cpp b/src/main.cpp
+index 5982e709..12aec8a2 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -294,7 +294,7 @@ void setup()
+     powerMonInit();
+     serialSinceMsec = millis();
+ 
+-    LOG_INFO("\n\n//\\ E S H T /\\ S T / C\n");
++    LOG_INFO("\n\nL O R A I T A L I A\n");
+ 
+     initDeepSleep();
+ 
