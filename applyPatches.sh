@@ -28,7 +28,7 @@ else
 fi
 
 # Estrae i file .patch dalla branch patches
-git checkout patches -- *.patch
+git checkout patches-$tag -- *.patch
 
 # Verifica se ci sono file .patch
 if ! ls *.patch >/dev/null 2>&1; then
