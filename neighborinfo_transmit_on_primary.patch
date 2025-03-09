@@ -1,13 +1,12 @@
 diff --git a/src/modules/NeighborInfoModule.cpp b/src/modules/NeighborInfoModule.cpp
-index fb658421..546fe5e0 100644
+index eebf428a..546fe5e0 100644
 --- a/src/modules/NeighborInfoModule.cpp
 +++ b/src/modules/NeighborInfoModule.cpp
-@@ -121,7 +121,7 @@ Will be used for broadcast.
- */
+@@ -122,7 +122,6 @@ Will be used for broadcast.
  int32_t NeighborInfoModule::runOnce()
  {
--    if (moduleConfig.neighbor_info.transmit_over_lora && !channels.isDefaultChannel(channels.getPrimaryIndex()) &&
-+    if (moduleConfig.neighbor_info.transmit_over_lora &&
+     if (moduleConfig.neighbor_info.transmit_over_lora &&
+-        (!channels.isDefaultChannel(channels.getPrimaryIndex()) || !RadioInterface::uses_default_frequency_slot) &&
          airTime->isTxAllowedChannelUtil(true) && airTime->isTxAllowedAirUtil()) {
          sendNeighborInfo(NODENUM_BROADCAST, false);
      } else {
