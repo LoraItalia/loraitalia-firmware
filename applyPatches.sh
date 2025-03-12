@@ -11,11 +11,11 @@ validate_tag() {
 }
 
 # Richiede il tag come input
-read -p "Inserisci il tag (formato v2.5.19.d5cd6f8): " tag
+read -p "Inserisci il tag (formato v2.5.23.bf958ed): " tag
 
 # Valida il formato del tag
 if ! validate_tag "$tag"; then
-    echo "Errore: il tag '$tag' non è valido. Deve rispettare il formato v2.5.19.d5cd6f8."
+    echo "Errore: il tag '$tag' non è valido. Deve rispettare il formato v2.5.23.bf958ed."
     exit 1
 fi
 

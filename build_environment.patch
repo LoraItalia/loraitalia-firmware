@@ -7,7 +7,7 @@ index e6735ec2..4f1b87fb 100644
  
  [platformio]
 -default_envs = tbeam
-+default_envs = tbeam, tlora-v2-1-1_6, heltec-v3, rak4631, t-echo, heltec-mesh-node-t114
++default_envs = tbeam, tlora-v2-1-1_6, heltec-v3, rak4631, t-echo, heltec-mesh-node-t114, meshlink
  
  extra_configs =
  	arch/*/*.ini
