@@ -1,17 +1,17 @@
 diff --git a/src/graphics/Screen.cpp b/src/graphics/Screen.cpp
-index 198dcc23..7b6dfbff 100644
+index 0c18f328..daab6264 100644
 --- a/src/graphics/Screen.cpp
 +++ b/src/graphics/Screen.cpp
-@@ -165,7 +165,7 @@ static void drawIconScreen(const char *upperMsg, OLEDDisplay *display, OLEDDispl
- #ifdef USERPREFS_SPLASH_TITLE
-     const char *title = USERPREFS_SPLASH_TITLE;
- #else
+@@ -162,7 +162,7 @@ static void drawIconScreen(const char *upperMsg, OLEDDisplay *display, OLEDDispl
+ 
+     display->setFont(FONT_MEDIUM);
+     display->setTextAlignment(TEXT_ALIGN_LEFT);
 -    const char *title = "meshtastic.org";
 +    const char *title = "loraitalia.it";
- #endif
      display->drawString(x + getStringCenteredX(title), y + SCREEN_HEIGHT - FONT_HEIGHT_MEDIUM, title);
      display->setFont(FONT_SMALL);
-@@ -218,7 +218,7 @@ static void drawWelcomeScreen(OLEDDisplay *display, OLEDDisplayUiState *state, i
+ 
+@@ -264,7 +264,7 @@ static void drawWelcomeScreen(OLEDDisplay *display, OLEDDisplayUiState *state, i
  {
      display->setFont(FONT_SMALL);
      display->setTextAlignment(TEXT_ALIGN_CENTER);
@@ -20,7 +20,7 @@ index 198dcc23..7b6dfbff 100644
      display->drawString(64 + x, y + FONT_HEIGHT_SMALL, getDeviceName());
      display->setTextAlignment(TEXT_ALIGN_LEFT);
  
-@@ -227,7 +227,7 @@ static void drawWelcomeScreen(OLEDDisplay *display, OLEDDisplayUiState *state, i
+@@ -273,7 +273,7 @@ static void drawWelcomeScreen(OLEDDisplay *display, OLEDDisplayUiState *state, i
          display->drawString(x, y + FONT_HEIGHT_SMALL * 3 - 3, "Meshtastic Android, iOS,");
          display->drawString(x, y + FONT_HEIGHT_SMALL * 4 - 3, "Web or CLI clients.");
      } else {
@@ -29,7 +29,7 @@ index 198dcc23..7b6dfbff 100644
          display->drawString(x, y + FONT_HEIGHT_SMALL * 3 - 3, "for more information.");
          display->drawString(x, y + FONT_HEIGHT_SMALL * 4 - 3, "");
      }
-@@ -364,7 +364,7 @@ static void drawCriticalFaultFrame(OLEDDisplay *display, OLEDDisplayUiState *sta
+@@ -410,7 +410,7 @@ static void drawCriticalFaultFrame(OLEDDisplay *display, OLEDDisplayUiState *sta
      display->drawString(0 + x, 0 + y, tempBuf);
      display->setTextAlignment(TEXT_ALIGN_LEFT);
      display->setFont(FONT_SMALL);
@@ -39,7 +39,7 @@ index 198dcc23..7b6dfbff 100644
  
  // Ignore messages originating from phone (from the current node 0x0) unless range test or store and forward module are enabled
 diff --git a/src/graphics/img/icon.xbm b/src/graphics/img/icon.xbm
-index 4e78ae8a..1f17b4d2 100644
+index 4e78ae8a..d1e02ef0 100644
 --- a/src/graphics/img/icon.xbm
 +++ b/src/graphics/img/icon.xbm
 @@ -2,21 +2,21 @@
@@ -62,6 +62,7 @@ index 4e78ae8a..1f17b4d2 100644
 -  0xFE, 0x00, 0x00, 0xFC, 0x01, 0x7E, 0x00, 0x7F, 0x00, 0x00, 0xF8, 0x01, 
 -  0x7E, 0x00, 0x3E, 0x00, 0x00, 0xF8, 0x01, 0x38, 0x00, 0x3C, 0x00, 0x00, 
 -  0x70, 0x00, 0x10, 0x00, 0x10, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 
+-  0x00, 0x00, 0x00, 0x00, };
 +  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 +  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 +  0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00,
@@ -78,6 +79,6 @@ index 4e78ae8a..1f17b4d2 100644
 +  0x03, 0x72, 0x4f, 0x79, 0x00, 0x00, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00,
 +  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 +  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-   0x00, 0x00, 0x00, 0x00, };
++  0x00, 0x00, 0x00, 0x00,};
  #endif
 \ No newline at end of file
