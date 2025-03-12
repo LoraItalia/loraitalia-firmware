@@ -7,7 +7,8 @@ on:
         description: 'specify firmware version tag'
         required: true
         type: choice
-        options: 
+        options:
+        - v2.5.23.bf958ed 
         - v2.5.19.f9876cf
         - v2.5.18.89ebafc
         - v2.5.15.79da236
