@@ -17,7 +17,8 @@ on:
         description: 'enter boards to compile for'
         required: true
         type: string
-  repository_dispatch:   
+  repository_dispatch:
+    types: test-dispatch      
 
 jobs:
   build:
@@ -25,7 +26,7 @@ jobs:
 
     steps:
       - name: Do Something Based On Triggered Event Data
-        run: 'echo "Triggered event"; exit 1'
+        run: 'echo "Triggered event text: ${{ github.event.client_payload.text }}"; exit 1'
       
       - name: Checkout Repository
         uses: actions/checkout@v4
