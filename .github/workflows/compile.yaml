@@ -25,8 +25,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Do Something Based On Triggered Event Data
-        run: 'echo "Triggered event text: ${{ github.event.client_payload.text }}"; exit 1'
+      - name: Send email with payload content
+        uses: dawidd6/action-send-mail@v4
+        with:
+          server_address: ${{secrets.MAIL_SERVER}}
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Github Action Test
+          to: macvenez@gmail.com
+          fromm: LoraItalia automated custom compiler
+          body: "Test ran successfully Triggered event text: ${{ github.event.client_payload.text }}""
+        #run: 'echo "Triggered event text: ${{ github.event.client_payload.text }}"; exit 1'
       
       - name: Checkout Repository
         uses: actions/checkout@v4
