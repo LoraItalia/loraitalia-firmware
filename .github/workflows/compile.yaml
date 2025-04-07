@@ -148,11 +148,12 @@ jobs:
         run: |
           curl -X GET https://www.loraitalia.it/movefw.php
 
-      - name: Zip firmware for Email
+      - name: Zip firmware
         if: ${{ github.event_name == 'repository_dispatch' }}
-        uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r firmware.zip artifacts/firmware-${{ env.VERSION_TAG }}
+        run: |
+          cd artifacts
+          zip -r firmware.zip firmware-${{ env.VERSION_TAG }}
+          cd ..
 
       - name: Send Email with zipped firmware
         if: ${{ github.event_name == 'repository_dispatch' }}
@@ -167,6 +168,6 @@ jobs:
           to: macvenez@gmail.com
           from: LoraItalia automated custom compiler
           body: "Your firmware custom firmware compilation has finished, with parameters: ${{ github.event.client_payload}}"
-          attachments: firmware.zip
+          attachments: artifacts/firmware.zip
 
 
