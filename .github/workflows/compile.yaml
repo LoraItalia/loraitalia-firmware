@@ -115,6 +115,7 @@ jobs:
             # Use sed to modify userPrefs.jsonc file
             sed -i -E "s|^[[:space:]]*// *\"$key\".*|\"$key\": \"$value\",|" userPrefs.jsonc
           done
+          cat userPrefs.jsonc
 
       - uses: actions/cache@v4
         with:
