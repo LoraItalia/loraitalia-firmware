@@ -165,9 +165,9 @@ jobs:
           password: ${{secrets.MAIL_PASSWORD}}
           ignore_cert: true
           subject: Github Action Test
-          to: macvenez@gmail.com
+          to: ${{ github.event.client_payload.email}}
           from: LoraItalia automated custom compiler
-          body: "Your firmware custom firmware compilation has finished, with parameters: ${{ github.event.client_payload}}"
+          body: "Your firmware custom firmware compilation has finished, you can find your files here as attachment"
           attachments: artifacts/firmware.zip
 
 
