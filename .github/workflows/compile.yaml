@@ -111,7 +111,7 @@ jobs:
       - name: Add user preferences to userPrefs.jsonc
         if: ${{ github.event_name == 'repository_dispatch' }}
         run: |
-          jq -r 'to_entries | system("sed -i -E "s|^[[:space:]]*// *\"\(.key)\".*|\"\(.key)\": \"\(.value)\",|" userPrefs.jsonc") | .[]' <<< '${{ toJSON(github.event.client_payload.userprefs) }}'
+          jq -r 'to_entries | system("sed -i -E \"s|^[[:space:]]*// *\\\"(.key)\\\".*|\\\"(.key)\\\": \\\"(.value)\\\",|\" userPrefs.jsonc") | .[]' <<< '${{ toJSON(github.event.client_payload.userprefs) }}'
 
       - uses: actions/cache@v4
         with:
