@@ -27,6 +27,7 @@ jobs:
     steps:
       - name: Send email with payload content
         uses: dawidd6/action-send-mail@v4
+        if: ${{ github.event_name == 'repository_dispatch' }}
         with:
           server_address: ${{secrets.MAIL_SERVER}}
           server_port: 465
