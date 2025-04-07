@@ -92,6 +92,11 @@ jobs:
           else
             echo "my_field is not present"
           fi
+          if [[ -n "${{ github.event.client_payload.userprefs.long_names}}" ]]; then
+            echo "my_field is set to ${{ github.event.client_payload.userprefs.long_names}}"
+          else
+            echo "my_field is not present"
+          fi
       
       - uses: actions/cache@v4
         with:
