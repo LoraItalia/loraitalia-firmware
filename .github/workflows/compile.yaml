@@ -80,16 +80,8 @@ jobs:
             fi
           done
 
-      - name: Add boards if run on workflow_dispatch
-        id: prepare_on_workflow_dispatch
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        run: sed -i "/^default_envs =/c\default_envs = ${{ inputs.boards }}" platformio.ini
-
-      - name: Add boards if run on repository_dispatch
-        id: prepare_on_repository_dispatch
-        if: ${{ github.event_name == 'repository_dispatch' }}
-        run: sed -i "/^default_envs =/c\default_envs = ${{ github.event.client_payload.boards }}" platformio.ini
-
+      - name: Add boards
+        run: sed -i "/^default_envs =/c\default_envs = ${{ inputs.boards }}${{ github.event.client_payload.boards }}" platformio.ini
       
       - uses: actions/cache@v4
         with:
@@ -122,7 +114,7 @@ jobs:
 
       - name: Copy compiled binaries
         run: |
-          for board in $(echo "${{ inputs.boards }}" | tr ',' ' '); do
+          for board in $(echo "${{ inputs.boards }}${{ github.event.client_payload.boards }}" | tr ',' ' '); do
             mkdir artifacts/firmware-${{ env.VERSION_TAG }}/$board
             cp .pio/build/$board/firmware.bin artifacts/firmware-${{ env.VERSION_TAG }}/$board/firmware.${{ env.VERSION_TAG }}.update.bin || true
             cp .pio/build/$board/firmware.factory.bin artifacts/firmware-${{ env.VERSION_TAG }}/$board/firmware.${{ env.VERSION_TAG }}.factory.bin || true
@@ -131,7 +123,7 @@ jobs:
           done
 
       - name: Upload FTP
-        if: steps.prepare_on_workflow_dispatch.outcome == 'success'
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
@@ -141,7 +133,7 @@ jobs:
           server-dir: "${{ inputs.ftpTarget }}"
 
       - name: Upload FTP
-        if: steps.prepare_on_workflow_dispatch.outcome == 'success'
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         uses: sebastianpopp/ftp-action@releases/v2
         with:
           host: ${{ secrets.FTP_HOST }}
@@ -151,18 +143,18 @@ jobs:
           remoteDir: "/"
 
       - name: Trigger Fw move
-        if: steps.prepare_on_workflow_dispatch.outcome == 'success'
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
           curl -X GET https://www.loraitalia.it/movefw.php
 
       - name: Zip firmware for Email
-        if: steps.prepare_on_repository_dispatch.outcome == 'success'
+        if: ${{ github.event_name == 'repository_dispatch' }}
         uses: montudor/action-zip@v1
         with:
           args: zip -qq -r firmware.zip artifacts/firmware-${{ env.VERSION_TAG }}
 
       - name: Send Email with zipped firmware
-        if: steps.prepare_on_repository_dispatch.outcome == 'success'
+        if: ${{ github.event_name == 'repository_dispatch' }}
         uses: dawidd6/action-send-mail@v4
         with:
           server_address: ${{secrets.MAIL_SERVER}}
