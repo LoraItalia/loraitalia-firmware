@@ -83,6 +83,15 @@ jobs:
 
       - name: Add boards
         run: sed -i "/^default_envs =/c\default_envs = $BOARDS" platformio.ini
+
+      - name: Add users preferences to userPrefs.jsonc
+        if: ${{ github.event_name == 'repository_dispatch' }}
+        run: |
+          if [[ -n "${{ github.event.client_payload.userprefs.long_name}}" ]]; then
+            echo "my_field is set to ${{ github.event.client_payload.userprefs.long_name}}"
+          else
+            echo "my_field is not present"
+          fi
       
       - uses: actions/cache@v4
         with:
