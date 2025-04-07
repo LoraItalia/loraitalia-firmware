@@ -89,7 +89,7 @@ jobs:
         run: |
           if [[ -n "${{ github.event.client_payload.userprefs.long_name}}" ]]; then
             echo "my_field is set to ${{ github.event.client_payload.userprefs.long_name}}"
-            sed -i "/^// "USERPREFS_CONFIG_OWNER_LONG_NAME"/c\"USERPREFS_CONFIG_OWNER_LONG_NAME": "${{ github.event.client_payload.userprefs.long_name}}", userPrefs.jsonc
+            sed -i -E "s|^[[:space:]]*// *\"USERPREFS_CONFIG_OWNER_LONG_NAME\".*|\"USERPREFS_CONFIG_OWNER_LONG_NAME\": \"${{ github.event.client_payload.userprefs.long_name}}\",|" userPrefs.jsonc
           else
             echo "my_field is not present"
           fi
