@@ -29,18 +29,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Send email on compilation start with payload content
-        uses: dawidd6/action-send-mail@v4
-        if: ${{ github.event_name == 'repository_dispatch' }}
-        with:
-          server_address: ${{secrets.MAIL_SERVER}}
-          server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: Github Action Test
-          to: macvenez@gmail.com
-          from: LoraItalia automated custom compiler
-          body: "Starting your custom compilation with parameters: ${{ github.event.client_payload}}"
+      # - name: Send email on compilation start with payload content
+      #   uses: dawidd6/action-send-mail@v4
+      #   if: ${{ github.event_name == 'repository_dispatch' }}
+      #   with:
+      #     server_address: ${{secrets.MAIL_SERVER}}
+      #     server_port: 465
+      #     username: ${{secrets.MAIL_USERNAME}}
+      #     password: ${{secrets.MAIL_PASSWORD}}
+      #     subject: Github Action Test
+      #     to: macvenez@gmail.com
+      #     from: LoraItalia automated custom compiler
+      #     body: "Starting your custom compilation with parameters: ${{ github.event.client_payload}}"
 
       # - name: End if run by dispatch
       #   if: ${{ github.event_name == 'repository_dispatch' }}
