@@ -34,9 +34,9 @@ jobs:
           password: ${{secrets.MAIL_PASSWORD}}
           subject: Github Action Test
           to: macvenez@gmail.com
-          fromm: LoraItalia automated custom compiler
-          body: "Test ran successfully Triggered event text: ${{ github.event.client_payload.text }}""
-      
+          from: LoraItalia automated custom compiler
+          body: "Test ran successfully Triggered event text: ${{ github.event.client_payload.text }}"
+          
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
