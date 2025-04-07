@@ -22,6 +22,7 @@ on:
 
 env: 
   TAG: ${{ inputs.tag }}${{ github.event.client_payload.tag }}
+  BOARDS: ${{ inputs.boards }}${{ github.event.client_payload.boards }}
 
 jobs:
   build:
@@ -81,7 +82,7 @@ jobs:
           done
 
       - name: Add boards
-        run: sed -i "/^default_envs =/c\default_envs = ${{ inputs.boards }}${{ github.event.client_payload.boards }}" platformio.ini
+        run: sed -i "/^default_envs =/c\default_envs = $BOARDS" platformio.ini
       
       - uses: actions/cache@v4
         with:
@@ -114,7 +115,7 @@ jobs:
 
       - name: Copy compiled binaries
         run: |
-          for board in $(echo "${{ inputs.boards }}${{ github.event.client_payload.boards }}" | tr ',' ' '); do
+          for board in $(echo "$BOARDS" | tr ',' ' '); do
             mkdir artifacts/firmware-${{ env.VERSION_TAG }}/$board
             cp .pio/build/$board/firmware.bin artifacts/firmware-${{ env.VERSION_TAG }}/$board/firmware.${{ env.VERSION_TAG }}.update.bin || true
             cp .pio/build/$board/firmware.factory.bin artifacts/firmware-${{ env.VERSION_TAG }}/$board/firmware.${{ env.VERSION_TAG }}.factory.bin || true
