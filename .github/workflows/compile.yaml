@@ -84,21 +84,34 @@ jobs:
       - name: Add boards
         run: sed -i "/^default_envs =/c\default_envs = $BOARDS" platformio.ini
 
+      # - name: Add users preferences to userPrefs.jsonc
+      #   if: ${{ github.event_name == 'repository_dispatch' }}
+      #   run: |
+      #     if [[ -n "${{ github.event.client_payload.userprefs.long_name}}" ]]; then
+      #       sed -i -E "s|^[[:space:]]*// *\"USERPREFS_CONFIG_OWNER_LONG_NAME\".*|\"USERPREFS_CONFIG_OWNER_LONG_NAME\": \"${{ github.event.client_payload.userprefs.long_name}}\",|" userPrefs.jsonc
+      #     else
+      #       echo "LONG_NAME is not present"
+      #     fi
+      #     if [[ -n "${{ github.event.client_payload.userprefs.short_name}}" ]]; then
+      #       sed -i -E "s|^[[:space:]]*// *\"USERPREFS_CONFIG_OWNER_SHORT_NAME\".*|\"USERPREFS_CONFIG_OWNER_SHORT_NAME\": \"${{ github.event.client_payload.userprefs.short_name}}\",|" userPrefs.jsonc
+      #     else
+      #       echo "SHORT_NAME is not present"
+      #     fi
+      #     if [[ -n "${{ github.event.client_payload.userprefs.modem_preset}}" ]]; then
+      #       sed -i -E "s|^[[:space:]]*// *\"USERPREFS_LORACONFIG_MODEM_PRESET\".*|\"USERPREFS_LORACONFIG_MODEM_PRESET\": \"${{ github.event.client_payload.userprefs.modem_preset}}\",|" userPrefs.jsonc
+      #     else
+      #       echo "MODEM_PRESET is not present"
+      #     fi
+      #     if [[ -n "${{ github.event.client_payload.userprefs.lora_region}}" ]]; then
+      #       sed -i -E "s|^[[:space:]]*// *\"USERPREFS_CONFIG_LORA_REGION\".*|\"USERPREFS_CONFIG_LORA_REGION\": \"${{ github.event.client_payload.userprefs.lora_region}}\",|" userPrefs.jsonc
+      #     else
+      #       echo "LORA_REGION is not present"
+      #     fi
+      #     cat userPrefs.jsonc
       - name: Add users preferences to userPrefs.jsonc
         if: ${{ github.event_name == 'repository_dispatch' }}
         run: |
-          if [[ -n "${{ github.event.client_payload.userprefs.long_name}}" ]]; then
-            echo "my_field is set to ${{ github.event.client_payload.userprefs.long_name}}"
-            sed -i -E "s|^[[:space:]]*// *\"USERPREFS_CONFIG_OWNER_LONG_NAME\".*|\"USERPREFS_CONFIG_OWNER_LONG_NAME\": \"${{ github.event.client_payload.userprefs.long_name}}\",|" userPrefs.jsonc
-          else
-            echo "my_field is not present"
-          fi
-          if [[ -n "${{ github.event.client_payload.userprefs.long_names}}" ]]; then
-            echo "my_field is set to ${{ github.event.client_payload.userprefs.long_names}}"
-          else
-            echo "my_field is not present"
-          fi
-          cat userPrefs.jsonc
+          jq -r 'to_entries | map(.key + " has value " + (.value | tostring)) | .[]' <<<"${{ github.event.client_payload.userprefs}}"
       
       - uses: actions/cache@v4
         with:
