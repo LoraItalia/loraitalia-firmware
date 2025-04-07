@@ -36,7 +36,6 @@ jobs:
           to: macvenez@gmail.com
           fromm: LoraItalia automated custom compiler
           body: "Test ran successfully Triggered event text: ${{ github.event.client_payload.text }}""
-        #run: 'echo "Triggered event text: ${{ github.event.client_payload.text }}"; exit 1'
       
       - name: Checkout Repository
         uses: actions/checkout@v4
