@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Send email with payload content
+      - name: Send email on compilation start with payload content
         uses: dawidd6/action-send-mail@v4
         if: ${{ github.event_name == 'repository_dispatch' }}
         with:
@@ -36,11 +36,11 @@ jobs:
           subject: Github Action Test
           to: macvenez@gmail.com
           from: LoraItalia automated custom compiler
-          body: "Test ran successfully Triggered event text: ${{ github.event.client_payload.text }}"
+          body: "Starting your custom compilation with parameters: ${{ github.event.client_payload}}"
 
-      - name: End if run by dispatch
-        if: ${{ github.event_name == 'repository_dispatch' }}
-        run: exit 1
+      # - name: End if run by dispatch
+      #   if: ${{ github.event_name == 'repository_dispatch' }}
+      #   run: exit 1
           
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -77,8 +77,15 @@ jobs:
             fi
           done
 
-      - name: Add boards
+      - name: Add boards if run on workflow_dispatch
+        id: prepare_on_workflow_dispatch
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         run: sed -i "/^default_envs =/c\default_envs = ${{ inputs.boards }}" platformio.ini
+
+      - name: Add boards if run on repository_dispatch
+        id: prepare_on_repository_dispatch
+        if: ${{ github.event_name == 'repository_dispatch' }}
+        run: sed -i "/^default_envs =/c\default_envs = ${{ github.event.client_payload.boards }}" platformio.ini
 
       
       - uses: actions/cache@v4
@@ -121,6 +128,7 @@ jobs:
           done
 
       - name: Upload FTP
+        if: steps.prepare_on_workflow_dispatch.outcome == 'success'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
@@ -130,6 +138,7 @@ jobs:
           server-dir: "${{ inputs.ftpTarget }}"
 
       - name: Upload FTP
+        if: steps.prepare_on_workflow_dispatch.outcome == 'success'
         uses: sebastianpopp/ftp-action@releases/v2
         with:
           host: ${{ secrets.FTP_HOST }}
@@ -139,5 +148,28 @@ jobs:
           remoteDir: "/"
 
       - name: Trigger Fw move
+        if: steps.prepare_on_workflow_dispatch.outcome == 'success'
         run: |
           curl -X GET https://www.loraitalia.it/movefw.php
+
+      - name: Zip firmware for Email
+        if: steps.prepare_on_repository_dispatch.outcome == 'success'
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r firmware.zip artifacts/firmware-${{ env.VERSION_TAG }}
+
+      - name: Send Email with zipped firmware
+        if: steps.prepare_on_repository_dispatch.outcome == 'success'
+        uses: dawidd6/action-send-mail@v4
+        with:
+          server_address: ${{secrets.MAIL_SERVER}}
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Github Action Test
+          to: macvenez@gmail.com
+          from: LoraItalia automated custom compiler
+          body: "Your firmware custom firmware compilation has finished, with parameters: ${{ github.event.client_payload}}"
+          attachments: firmware.zip
+
+
