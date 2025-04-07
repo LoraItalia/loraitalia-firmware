@@ -20,6 +20,9 @@ on:
   repository_dispatch:
     types: test-dispatch      
 
+env: 
+  TAG: ${{ inputs.tag }}${{ github.event.client_payload.tag }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -59,12 +62,12 @@ jobs:
 
       - name: Checkout Code for Target Tag
         run: |
-          git checkout "tags/${{ inputs.tag }}"
+          git checkout "tags/$TAG"
 
       - name: Checkout Patch Files
         run: |
-          git fetch origin "refs/tags/patches-${{ inputs.tag }}:refs/tags/patches-${{ inputs.tag }}"
-          git checkout "patches-${{ inputs.tag }}" -- *.patch
+          git fetch origin "refs/tags/patches-$TAG:refs/tags/patches-$TAG"
+          git checkout "patches-$TAG" -- *.patch
 
       - name: Apply Patches
         run: |
