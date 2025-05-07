@@ -40,7 +40,7 @@ jobs:
       #     username: ${{secrets.MAIL_USERNAME}}
       #     password: ${{secrets.MAIL_PASSWORD}}
       #     subject: Github Action Test
-      #     to: macvenez@gmail.com
+      #     to: ***@gmail.com
       #     from: LoraItalia automated custom compiler
       #     body: "Starting your custom compilation with parameters: ${{ github.event.client_payload}}"
 
