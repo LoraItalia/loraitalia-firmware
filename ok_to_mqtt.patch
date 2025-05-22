@@ -8,7 +8,7 @@ index f642af23..3c5fad27 100644
               (ch.settings.psk.size == 32 && memcmp(ch.settings.psk.bytes, eventpsk, 32)))) {
 -            LOG_INFO("MQTT onSend - Not forwarding packet due to DontMqttMeBro flag");
 -            return;
-+            LOG_INFO("MQTT onSend - Not forwarding packet even if it has DontMqttMeBro flag");
++            LOG_INFO("MQTT onSend - Forwarding packet even if it has DontMqttMeBro flag");
 +            //return; //commenting this out makes it possible to continue processing the packet even if it has dontmqtt flag
          }
  
