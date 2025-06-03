@@ -1,0 +1,15 @@
+diff --git a/src/main.cpp b/src/main.cpp
+index 7a11ca2e0..16a360353 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -282,8 +282,10 @@ static int32_t ledBlinker()
+ {
+     // Still set up the blinking (heartbeat) interval but skip code path below, so LED will blink if
+     // config.device.led_heartbeat_disabled is changed
++    #ifndef MESHLINK
+     if (config.device.led_heartbeat_disabled)
+         return 1000;
++    #endif
+ 
+     static bool ledOn;
+     ledOn ^= 1;

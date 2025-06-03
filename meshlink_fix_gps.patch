@@ -1,0 +1,18 @@
+diff --git a/src/gps/GPS.cpp b/src/gps/GPS.cpp
+index 142241c43..f5243ab7c 100644
+--- a/src/gps/GPS.cpp
++++ b/src/gps/GPS.cpp
+@@ -1418,7 +1418,14 @@ GPS *GPS::createGps()
+ 
+     GpioVirtPin *virtPin = new GpioVirtPin();
+     new_gps->enablePin = virtPin; // Always at least populate a virtual pin
+-    if (_en_gpio) {  
++    #if defined(MESHLINK)
++    bool overrideGPSEnPin = true;
++    #else
++    bool overrideGPSEnPin = false;
++    #endif
++    if (_en_gpio || overrideGPSEnPin) {
+         GpioPin *p = new GpioHwPin(_en_gpio);
+ 
+         if (!GPS_EN_ACTIVE) { // Need to invert the pin before hardware
