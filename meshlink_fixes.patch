@@ -11,7 +11,7 @@ index 142241c43..f5243ab7c 100644
 +    bool overrideGPSEnPin = true;
 +    #else
 +    bool overrideGPSEnPin = false;
-+    #endif   
++    #endif
 +    if (_en_gpio || overrideGPSEnPin) {
          GpioPin *p = new GpioHwPin(_en_gpio);
  
