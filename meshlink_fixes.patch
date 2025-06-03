@@ -6,14 +6,12 @@ index 142241c43..f5243ab7c 100644
  
      GpioVirtPin *virtPin = new GpioVirtPin();
      new_gps->enablePin = virtPin; // Always at least populate a virtual pin
--    if (_en_gpio) {
-+    
+-    if (_en_gpio) {  
 +    #if defined(MESHLINK)
 +    bool overrideGPSEnPin = true;
 +    #else
 +    bool overrideGPSEnPin = false;
-+    #endif
-+    
++    #endif   
 +    if (_en_gpio || overrideGPSEnPin) {
          GpioPin *p = new GpioHwPin(_en_gpio);
  
