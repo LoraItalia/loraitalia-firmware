@@ -1,12 +1,12 @@
 diff --git a/src/gps/GPS.cpp b/src/gps/GPS.cpp
-index 142241c43..f5243ab7c 100644
+index 142241c43..d8b862361 100644
 --- a/src/gps/GPS.cpp
 +++ b/src/gps/GPS.cpp
-@@ -1418,7 +1418,14 @@ GPS *GPS::createGps()
+@@ -1418,7 +1418,12 @@ GPS *GPS::createGps()
  
      GpioVirtPin *virtPin = new GpioVirtPin();
      new_gps->enablePin = virtPin; // Always at least populate a virtual pin
--    if (_en_gpio) {  
+-    if (_en_gpio) {
 +    #if defined(MESHLINK)
 +    bool overrideGPSEnPin = true;
 +    #else
