@@ -1,8 +1,8 @@
 diff --git a/src/graphics/Screen.cpp b/src/graphics/Screen.cpp
-index 0c18f328..daab6264 100644
+index 61999ee79..328f68953 100644
 --- a/src/graphics/Screen.cpp
 +++ b/src/graphics/Screen.cpp
-@@ -162,7 +162,7 @@ static void drawIconScreen(const char *upperMsg, OLEDDisplay *display, OLEDDispl
+@@ -163,7 +163,7 @@ static void drawIconScreen(const char *upperMsg, OLEDDisplay *display, OLEDDispl
  
      display->setFont(FONT_MEDIUM);
      display->setTextAlignment(TEXT_ALIGN_LEFT);
@@ -11,7 +11,7 @@ index 0c18f328..daab6264 100644
      display->drawString(x + getStringCenteredX(title), y + SCREEN_HEIGHT - FONT_HEIGHT_MEDIUM, title);
      display->setFont(FONT_SMALL);
  
-@@ -264,7 +264,7 @@ static void drawWelcomeScreen(OLEDDisplay *display, OLEDDisplayUiState *state, i
+@@ -265,7 +265,7 @@ static void drawWelcomeScreen(OLEDDisplay *display, OLEDDisplayUiState *state, i
  {
      display->setFont(FONT_SMALL);
      display->setTextAlignment(TEXT_ALIGN_CENTER);
@@ -20,7 +20,7 @@ index 0c18f328..daab6264 100644
      display->drawString(64 + x, y + FONT_HEIGHT_SMALL, getDeviceName());
      display->setTextAlignment(TEXT_ALIGN_LEFT);
  
-@@ -273,7 +273,7 @@ static void drawWelcomeScreen(OLEDDisplay *display, OLEDDisplayUiState *state, i
+@@ -274,7 +274,7 @@ static void drawWelcomeScreen(OLEDDisplay *display, OLEDDisplayUiState *state, i
          display->drawString(x, y + FONT_HEIGHT_SMALL * 3 - 3, "Meshtastic Android, iOS,");
          display->drawString(x, y + FONT_HEIGHT_SMALL * 4 - 3, "Web or CLI clients.");
      } else {
@@ -29,7 +29,7 @@ index 0c18f328..daab6264 100644
          display->drawString(x, y + FONT_HEIGHT_SMALL * 3 - 3, "for more information.");
          display->drawString(x, y + FONT_HEIGHT_SMALL * 4 - 3, "");
      }
-@@ -410,7 +410,7 @@ static void drawCriticalFaultFrame(OLEDDisplay *display, OLEDDisplayUiState *sta
+@@ -411,7 +411,7 @@ static void drawCriticalFaultFrame(OLEDDisplay *display, OLEDDisplayUiState *sta
      display->drawString(0 + x, 0 + y, tempBuf);
      display->setTextAlignment(TEXT_ALIGN_LEFT);
      display->setFont(FONT_SMALL);
@@ -39,7 +39,7 @@ index 0c18f328..daab6264 100644
  
  // Ignore messages originating from phone (from the current node 0x0) unless range test or store and forward module are enabled
 diff --git a/src/graphics/img/icon.xbm b/src/graphics/img/icon.xbm
-index 4e78ae8a..d1e02ef0 100644
+index 4e78ae8a1..d1e02ef06 100644
 --- a/src/graphics/img/icon.xbm
 +++ b/src/graphics/img/icon.xbm
 @@ -2,21 +2,21 @@
@@ -82,3 +82,16 @@ index 4e78ae8a..d1e02ef0 100644
 +  0x00, 0x00, 0x00, 0x00,};
  #endif
 \ No newline at end of file
+diff --git a/src/main.cpp b/src/main.cpp
+index 7a11ca2e0..5d9def6ac 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -406,7 +406,7 @@ void setup()
+     powerMonInit();
+     serialSinceMsec = millis();
+ 
+-    LOG_INFO("\n\n//\\ E S H T /\\ S T / C\n");
++    LOG_INFO("\n\nL O R A I T A L I A\n");
+ 
+     initDeepSleep();
+ 
