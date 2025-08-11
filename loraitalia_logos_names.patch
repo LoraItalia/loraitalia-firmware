@@ -1,8 +1,21 @@
-diff --git a/src/graphics/Screen.cpp b/src/graphics/Screen.cpp
-index 61999ee79..328f68953 100644
---- a/src/graphics/Screen.cpp
-+++ b/src/graphics/Screen.cpp
-@@ -163,7 +163,7 @@ static void drawIconScreen(const char *upperMsg, OLEDDisplay *display, OLEDDispl
+diff --git a/src/graphics/draw/NotificationRenderer.cpp b/src/graphics/draw/NotificationRenderer.cpp
+index d9cf280ac..5ec014ec8 100644
+--- a/src/graphics/draw/NotificationRenderer.cpp
++++ b/src/graphics/draw/NotificationRenderer.cpp
+@@ -555,7 +555,7 @@ void NotificationRenderer::drawCriticalFaultFrame(OLEDDisplay *display, OLEDDisp
+     display->drawString(0 + x, 0 + y, tempBuf);
+     display->setTextAlignment(TEXT_ALIGN_LEFT);
+     display->setFont(FONT_SMALL);
+-    display->drawString(0 + x, FONT_HEIGHT_MEDIUM + y, "For help, please visit \nmeshtastic.org");
++    display->drawString(0 + x, FONT_HEIGHT_MEDIUM + y, "For help, please visit \nloraitalia.it");
+ }
+ 
+ void NotificationRenderer::drawFrameFirmware(OLEDDisplay *display, OLEDDisplayUiState *state, int16_t x, int16_t y)
+diff --git a/src/graphics/draw/UIRenderer.cpp b/src/graphics/draw/UIRenderer.cpp
+index 71d92616f..3344a2e16 100644
+--- a/src/graphics/draw/UIRenderer.cpp
++++ b/src/graphics/draw/UIRenderer.cpp
+@@ -837,7 +837,7 @@ void UIRenderer::drawIconScreen(const char *upperMsg, OLEDDisplay *display, OLED
  
      display->setFont(FONT_MEDIUM);
      display->setTextAlignment(TEXT_ALIGN_LEFT);
@@ -11,33 +24,6 @@ index 61999ee79..328f68953 100644
      display->drawString(x + getStringCenteredX(title), y + SCREEN_HEIGHT - FONT_HEIGHT_MEDIUM, title);
      display->setFont(FONT_SMALL);
  
-@@ -265,7 +265,7 @@ static void drawWelcomeScreen(OLEDDisplay *display, OLEDDisplayUiState *state, i
- {
-     display->setFont(FONT_SMALL);
-     display->setTextAlignment(TEXT_ALIGN_CENTER);
--    display->drawString(64 + x, y, "//\\ E S H T /\\ S T / C");
-+    display->drawString(64 + x, y, "L O R A I T A L I A");
-     display->drawString(64 + x, y + FONT_HEIGHT_SMALL, getDeviceName());
-     display->setTextAlignment(TEXT_ALIGN_LEFT);
- 
-@@ -274,7 +274,7 @@ static void drawWelcomeScreen(OLEDDisplay *display, OLEDDisplayUiState *state, i
-         display->drawString(x, y + FONT_HEIGHT_SMALL * 3 - 3, "Meshtastic Android, iOS,");
-         display->drawString(x, y + FONT_HEIGHT_SMALL * 4 - 3, "Web or CLI clients.");
-     } else {
--        display->drawString(x, y + FONT_HEIGHT_SMALL * 2 - 3, "Visit meshtastic.org");
-+        display->drawString(x, y + FONT_HEIGHT_SMALL * 2 - 3, "Visit loraitalia.it");
-         display->drawString(x, y + FONT_HEIGHT_SMALL * 3 - 3, "for more information.");
-         display->drawString(x, y + FONT_HEIGHT_SMALL * 4 - 3, "");
-     }
-@@ -411,7 +411,7 @@ static void drawCriticalFaultFrame(OLEDDisplay *display, OLEDDisplayUiState *sta
-     display->drawString(0 + x, 0 + y, tempBuf);
-     display->setTextAlignment(TEXT_ALIGN_LEFT);
-     display->setFont(FONT_SMALL);
--    display->drawString(0 + x, FONT_HEIGHT_MEDIUM + y, "For help, please visit \nmeshtastic.org");
-+    display->drawString(0 + x, FONT_HEIGHT_MEDIUM + y, "For help, please visit \nloraitalia.it");
- }
- 
- // Ignore messages originating from phone (from the current node 0x0) unless range test or store and forward module are enabled
 diff --git a/src/graphics/img/icon.xbm b/src/graphics/img/icon.xbm
 index 4e78ae8a1..d1e02ef06 100644
 --- a/src/graphics/img/icon.xbm
@@ -82,11 +68,24 @@ index 4e78ae8a1..d1e02ef06 100644
 +  0x00, 0x00, 0x00, 0x00,};
  #endif
 \ No newline at end of file
+diff --git a/src/graphics/niche/InkHUD/Applets/System/Tips/TipsApplet.cpp b/src/graphics/niche/InkHUD/Applets/System/Tips/TipsApplet.cpp
+index ade44ab65..d4c98d717 100644
+--- a/src/graphics/niche/InkHUD/Applets/System/Tips/TipsApplet.cpp
++++ b/src/graphics/niche/InkHUD/Applets/System/Tips/TipsApplet.cpp
+@@ -73,7 +73,7 @@ void InkHUD::TipsApplet::onRender()
+         }
+ 
+         cursorY += fontSmall.lineHeight() * 1.5;
+-        printAt(0, cursorY, "More info at meshtastic.org");
++        printAt(0, cursorY, "More info at loraitalia.it");
+ 
+         setFont(fontSmall);
+         printAt(0, Y(1.0), "Press button to continue", LEFT, BOTTOM);
 diff --git a/src/main.cpp b/src/main.cpp
-index 7a11ca2e0..5d9def6ac 100644
+index 9e46021c9..2eaf69125 100644
 --- a/src/main.cpp
 +++ b/src/main.cpp
-@@ -406,7 +406,7 @@ void setup()
+@@ -397,7 +397,7 @@ void setup()
      powerMonInit();
      serialSinceMsec = millis();
  

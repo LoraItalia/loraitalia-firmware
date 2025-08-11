@@ -1,13 +1,13 @@
 diff --git a/platformio.ini b/platformio.ini
-index ba41b386..ce8d19b7 100644
+index a5a23e56f..91b32be2d 100644
 --- a/platformio.ini
 +++ b/platformio.ini
-@@ -47,7 +47,7 @@ build_flags = -Wno-missing-field-initializers
+@@ -48,7 +48,7 @@ build_flags = -Wno-missing-field-initializers
  	-DRADIOLIB_EXCLUDE_APRS=1
  	-DRADIOLIB_EXCLUDE_LORAWAN=1
  	-DMESHTASTIC_EXCLUDE_DROPZONE=1
 -	-DMESHTASTIC_EXCLUDE_REMOTEHARDWARE=1
 +	-DMESHTASTIC_EXCLUDE_REMOTEHARDWARE=0
  	-DMESHTASTIC_EXCLUDE_HEALTH_TELEMETRY=1
-   	-DMESHTASTIC_EXCLUDE_POWERSTRESS=1 ; exclude power stress test module from main firmware
+ 	-DMESHTASTIC_EXCLUDE_POWERSTRESS=1 ; exclude power stress test module from main firmware
  	-DMESHTASTIC_EXCLUDE_GENERIC_THREAD_MODULE=1
