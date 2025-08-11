@@ -1,14 +1,16 @@
 diff --git a/src/mesh/PhoneAPI.cpp b/src/mesh/PhoneAPI.cpp
-index 6789acbb..62a6ca35 100644
+index 305689fff..e3bd8b9e1 100644
 --- a/src/mesh/PhoneAPI.cpp
 +++ b/src/mesh/PhoneAPI.cpp
-@@ -637,7 +637,7 @@ bool PhoneAPI::handleToRadioPacket(meshtastic_MeshPacket &p)
+@@ -675,9 +675,9 @@ bool PhoneAPI::handleToRadioPacket(meshtastic_MeshPacket &p)
          }
  
      if (p.decoded.portnum == meshtastic_PortNum_TRACEROUTE_APP && lastPortNumToRadio[p.decoded.portnum] &&
 -        Throttle::isWithinTimespanMs(lastPortNumToRadio[p.decoded.portnum], THIRTY_SECONDS_MS)) {
-+        Throttle::isWithinTimespanMs(lastPortNumToRadio[p.decoded.portnum], FIVE_SECONDS_MS)) {
++        Throttle::isWithinTimespanMs(lastPortNumToRadio[p.decoded.portnum], TEN_SECONDS_MS)) {
          LOG_WARN("Rate limit portnum %d", p.decoded.portnum);
 -        sendNotification(meshtastic_LogRecord_Level_WARNING, p.id, "TraceRoute can only be sent once every 30 seconds");
-+        sendNotification(meshtastic_LogRecord_Level_WARNING, p.id, "TraceRoute can only be sent once every 5 seconds");
++        sendNotification(meshtastic_LogRecord_Level_WARNING, p.id, "TraceRoute can only be sent once every 10 seconds");
          meshtastic_QueueStatus qs = router->getQueueStatus();
+         service->sendQueueStatusToPhone(qs, 0, p.id);
+         return false;
