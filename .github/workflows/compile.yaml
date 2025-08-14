@@ -197,6 +197,7 @@ jobs:
           cd ..
 
       - name: Mask Email
+        if: failure() || github.event_name == 'repository_dispatch'
         run: |
           TO_EMAIL=$(jq -r '.client_payload.email' $GITHUB_EVENT_PATH)
           echo ::add-mask::$TO_EMAIL
