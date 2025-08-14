@@ -25,8 +25,8 @@ on:
     types: firmware-build-request      
 
 env: 
-  TAG: ${{ inputs.tag }}${{ github.event.client_payload.tag }}
-  BOARDS: ${{ inputs.boards }}${{ github.event.client_payload.boards }}
+  TAG: ${{ inputs.tag || github.event.client_payload.tag }}
+  BOARDS: ${{ inputs.boards || github.event.client_payload.boards }}
 
 jobs:
   build:
@@ -211,7 +211,7 @@ jobs:
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
           ignore_cert: true
-          subject: LoraItalia Firmware ${{ env.$TAG }} for ${{ env.$BOARDS }}
+          subject: LoraItalia Firmware ${{ env.TAG }} for ${{ env.BOARDS }}
           to: ${{ env.TO_EMAIL }}
           from: LoraItalia automated Builder
           body: "The firmware build for ${{ env.$BOARDS }} version ${{ env.$TAG }} has finished, you can find it as attachment"
