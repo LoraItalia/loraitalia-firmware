@@ -30,7 +30,7 @@ env:
 
 jobs:
   build:
-    runs-on: [self-hosted, Loraitalia]
+    runs-on: [self-hosted, LoraItalia]
 
     steps:
       # - name: Send email on compilation start with payload content
