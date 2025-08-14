@@ -30,7 +30,7 @@ env:
 
 jobs:
   build:
-    runs-on: [ubuntu-latest]
+    runs-on: [self-hosted, Loraitalia]
 
     steps:
       # - name: Send email on compilation start with payload content
