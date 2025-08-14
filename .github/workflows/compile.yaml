@@ -22,7 +22,7 @@ on:
         required: true
         type: string
   repository_dispatch:
-    types: test-dispatch      
+    types: firmware-build-request      
 
 env: 
   TAG: ${{ inputs.tag }}${{ github.event.client_payload.tag }}
