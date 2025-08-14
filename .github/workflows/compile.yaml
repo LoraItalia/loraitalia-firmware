@@ -51,7 +51,7 @@ jobs:
       #   run: exit 1
       - name: Mask Password
         run: |
-          API_PASSWORD=$(jq -r '.client_payload.email' $GITHUB_EVENT_PATH)
+          TO_EMAIL=$(jq -r '.client_payload.email' $GITHUB_EVENT_PATH)
           echo ::add-mask::$TO_EMAIL
           echo TO_EMAIL=$TO_EMAIL >> $GITHUB_ENV
         
