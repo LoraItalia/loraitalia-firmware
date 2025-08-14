@@ -49,11 +49,6 @@ jobs:
       # - name: End if run by dispatch
       #   if: ${{ github.event_name == 'repository_dispatch' }}
       #   run: exit 1
-      - name: Mask Password
-        run: |
-          TO_EMAIL=$(jq -r '.client_payload.email' $GITHUB_EVENT_PATH)
-          echo ::add-mask::$TO_EMAIL
-          echo TO_EMAIL=$TO_EMAIL >> $GITHUB_ENV
         
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -197,6 +192,12 @@ jobs:
           zip -r firmware.zip firmware-${{ env.VERSION_TAG }}
           cd ..
 
+      - name: Mask Email
+        run: |
+          TO_EMAIL=$(jq -r '.client_payload.email' $GITHUB_EVENT_PATH)
+          echo ::add-mask::$TO_EMAIL
+          echo TO_EMAIL=$TO_EMAIL >> $GITHUB_ENV
+
       - name: Send Email with zipped firmware
         if: ${{ github.event_name == 'repository_dispatch' }}
         uses: dawidd6/action-send-mail@v4
@@ -207,7 +208,7 @@ jobs:
           password: ${{secrets.MAIL_PASSWORD}}
           ignore_cert: true
           subject: Github Action Test
-          to: ${{ github.event.client_payload.email}}
+          to: ${{ env.TO_EMAIL }}
           from: LoraItalia automated custom compiler
           body: "Your firmware custom firmware compilation has finished, you can find your files here as attachment"
           attachments: artifacts/firmware.zip
