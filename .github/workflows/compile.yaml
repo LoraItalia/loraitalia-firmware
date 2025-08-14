@@ -49,8 +49,11 @@ jobs:
       # - name: End if run by dispatch
       #   if: ${{ github.event_name == 'repository_dispatch' }}
       #   run: exit 1
-      - name: Mask email from payload
-        run: echo "::add-mask::${{ github.event.client_payload.email }}" > /dev/null
+      - name: Mask Password
+        run: |
+          API_PASSWORD=$(jq -r '.client_payload.email' $GITHUB_EVENT_PATH)
+          echo ::add-mask::$TO_EMAIL
+          echo TO_EMAIL=$TO_EMAIL >> $GITHUB_ENV
         
       - name: Checkout Repository
         uses: actions/checkout@v4
