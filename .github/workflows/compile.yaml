@@ -62,6 +62,7 @@ jobs:
 
       - name: Fetch Tags from Upstream
         run: |
+          git remote remove upstream || true
           git remote add upstream https://github.com/meshtastic/firmware.git
           git fetch upstream
 
