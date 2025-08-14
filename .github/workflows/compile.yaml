@@ -211,10 +211,10 @@ jobs:
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
           ignore_cert: true
-          subject: Github Action Test
+          subject: LoraItalia Firmware $TAG for $BOARDS
           to: ${{ env.TO_EMAIL }}
-          from: LoraItalia automated custom compiler
-          body: "Your firmware custom firmware compilation has finished, you can find your files here as attachment"
+          from: LoraItalia automated Builder
+          body: "The firmware build for $BOARDS version $TAG has finished, you can find it as attachment"
           attachments: artifacts/firmware.zip
 
 
