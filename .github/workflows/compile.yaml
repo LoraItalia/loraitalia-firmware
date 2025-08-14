@@ -211,10 +211,10 @@ jobs:
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
           ignore_cert: true
-          subject: LoraItalia Firmware $TAG for $BOARDS
+          subject: LoraItalia Firmware ${{ env.$TAG }} for ${{ env.$BOARDS }}
           to: ${{ env.TO_EMAIL }}
           from: LoraItalia automated Builder
-          body: "The firmware build for $BOARDS version $TAG has finished, you can find it as attachment"
+          body: "The firmware build for ${{ env.$BOARDS }} version ${{ env.$TAG }} has finished, you can find it as attachment"
           attachments: artifacts/firmware.zip
 
 
