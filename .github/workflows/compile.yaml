@@ -122,16 +122,19 @@ jobs:
           done
           cat userPrefs.jsonc
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/pip
             ~/.platformio/.cache
-          key: ${{ runner.os }}-pio
-          
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-pio-${{ hashFiles('platformio.ini') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-pio-
 
       - name: Read version from file
         id: get_version
@@ -141,7 +144,7 @@ jobs:
           echo "VERSION_TAG=$version-$commit_hash" >> $GITHUB_ENV
 
       - name: Install PlatformIO Core
-        run: pip install --upgrade platformio
+        run: pip install --upgrade --cache-dir ~/.cache/pip platformio
 
       - name: Build PlatformIO Project
         run: pio run
