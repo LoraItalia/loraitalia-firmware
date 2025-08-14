@@ -214,7 +214,7 @@ jobs:
           subject: LoraItalia Firmware ${{ env.TAG }} for ${{ env.BOARDS }}
           to: ${{ env.TO_EMAIL }}
           from: LoraItalia automated Builder
-          body: "The firmware build for ${{ env.$BOARDS }} version ${{ env.$TAG }} has finished, you can find it as attachment"
+          body: "The firmware build for ${{ env.BOARDS }} version ${{ env.TAG }} has finished, you can find it as attachment"
           attachments: artifacts/firmware.zip
 
 
