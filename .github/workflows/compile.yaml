@@ -49,7 +49,9 @@ jobs:
       # - name: End if run by dispatch
       #   if: ${{ github.event_name == 'repository_dispatch' }}
       #   run: exit 1
-          
+      - name: Mask email from payload
+        run: echo "::add-mask::${{ github.event.client_payload.email }}" > /dev/null
+        
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
@@ -191,9 +193,6 @@ jobs:
           cd artifacts
           zip -r firmware.zip firmware-${{ env.VERSION_TAG }}
           cd ..
-
-      - name: Mask email from payload
-        run: echo "::add-mask::${{ github.event.client_payload.email }}"
 
       - name: Send Email with zipped firmware
         if: ${{ github.event_name == 'repository_dispatch' }}
