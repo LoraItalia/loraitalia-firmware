@@ -1,17 +1,17 @@
 diff --git a/src/mesh/MeshService.cpp b/src/mesh/MeshService.cpp
-index 297c7b2e..9bb8bf47 100644
+index 1b2af082d..fa8e21c6d 100644
 --- a/src/mesh/MeshService.cpp
 +++ b/src/mesh/MeshService.cpp
-@@ -79,7 +79,7 @@ int MeshService::handleFromRadio(const meshtastic_MeshPacket *mp)
+@@ -85,7 +85,7 @@ int MeshService::handleFromRadio(const meshtastic_MeshPacket *mp)
      powerFSM.trigger(EVENT_PACKET_FOR_PHONE); // Possibly keep the node from sleeping
  
      nodeDB->updateFrom(*mp); // update our DB state based off sniffing every RX packet from the radio
--    bool isPreferredRebroadcaster =
-+    /*bool isPreferredRebroadcaster =
-         IS_ONE_OF(config.device.role, meshtastic_Config_DeviceConfig_Role_ROUTER, meshtastic_Config_DeviceConfig_Role_REPEATER);
+-    bool isPreferredRebroadcaster = config.device.role == meshtastic_Config_DeviceConfig_Role_ROUTER;
++    /*bool isPreferredRebroadcaster = config.device.role == meshtastic_Config_DeviceConfig_Role_ROUTER;
      if (mp->which_payload_variant == meshtastic_MeshPacket_decoded_tag &&
          mp->decoded.portnum == meshtastic_PortNum_TELEMETRY_APP && mp->decoded.request_id > 0) {
-@@ -101,7 +101,7 @@ int MeshService::handleFromRadio(const meshtastic_MeshPacket *mp)
+         LOG_DEBUG("Received telemetry response. Skip sending our NodeInfo");
+@@ -106,7 +106,7 @@ int MeshService::handleFromRadio(const meshtastic_MeshPacket *mp)
          } else {
              LOG_DEBUG("Skip sending NodeInfo > 25%% ch. util");
          }

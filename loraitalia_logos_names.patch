@@ -1,8 +1,8 @@
 diff --git a/src/graphics/draw/NotificationRenderer.cpp b/src/graphics/draw/NotificationRenderer.cpp
-index d9cf280ac..5ec014ec8 100644
+index 26bfe8447..cbdfd2ae3 100644
 --- a/src/graphics/draw/NotificationRenderer.cpp
 +++ b/src/graphics/draw/NotificationRenderer.cpp
-@@ -555,7 +555,7 @@ void NotificationRenderer::drawCriticalFaultFrame(OLEDDisplay *display, OLEDDisp
+@@ -726,7 +726,7 @@ void NotificationRenderer::drawCriticalFaultFrame(OLEDDisplay *display, OLEDDisp
      display->drawString(0 + x, 0 + y, tempBuf);
      display->setTextAlignment(TEXT_ALIGN_LEFT);
      display->setFont(FONT_SMALL);
@@ -12,10 +12,10 @@ index d9cf280ac..5ec014ec8 100644
  
  void NotificationRenderer::drawFrameFirmware(OLEDDisplay *display, OLEDDisplayUiState *state, int16_t x, int16_t y)
 diff --git a/src/graphics/draw/UIRenderer.cpp b/src/graphics/draw/UIRenderer.cpp
-index 71d92616f..3344a2e16 100644
+index ff8cd20c5..82c47be8e 100644
 --- a/src/graphics/draw/UIRenderer.cpp
 +++ b/src/graphics/draw/UIRenderer.cpp
-@@ -837,7 +837,7 @@ void UIRenderer::drawIconScreen(const char *upperMsg, OLEDDisplay *display, OLED
+@@ -956,7 +956,7 @@ void UIRenderer::drawIconScreen(const char *upperMsg, OLEDDisplay *display, OLED
  
      display->setFont(FONT_MEDIUM);
      display->setTextAlignment(TEXT_ALIGN_LEFT);
@@ -23,7 +23,7 @@ index 71d92616f..3344a2e16 100644
 +    const char *title = "loraitalia.it";
      display->drawString(x + getStringCenteredX(title), y + SCREEN_HEIGHT - FONT_HEIGHT_MEDIUM, title);
      display->setFont(FONT_SMALL);
- 
+     // Draw region in upper left
 diff --git a/src/graphics/img/icon.xbm b/src/graphics/img/icon.xbm
 index 4e78ae8a1..d1e02ef06 100644
 --- a/src/graphics/img/icon.xbm
@@ -69,7 +69,7 @@ index 4e78ae8a1..d1e02ef06 100644
  #endif
 \ No newline at end of file
 diff --git a/src/graphics/niche/InkHUD/Applets/System/Tips/TipsApplet.cpp b/src/graphics/niche/InkHUD/Applets/System/Tips/TipsApplet.cpp
-index ade44ab65..d4c98d717 100644
+index ade44ab65..3ae46ca23 100644
 --- a/src/graphics/niche/InkHUD/Applets/System/Tips/TipsApplet.cpp
 +++ b/src/graphics/niche/InkHUD/Applets/System/Tips/TipsApplet.cpp
 @@ -73,7 +73,7 @@ void InkHUD::TipsApplet::onRender()
@@ -81,11 +81,20 @@ index ade44ab65..d4c98d717 100644
  
          setFont(fontSmall);
          printAt(0, Y(1.0), "Press button to continue", LEFT, BOTTOM);
+@@ -158,7 +158,7 @@ void InkHUD::TipsApplet::renderWelcome()
+     setFont(fontMedium);
+     std::string title;
+     if (width() >= 200) // Future proofing: hide if *tiny* display
+-        title = "meshtastic.org";
++        title = "loraitalia.it";
+     uint16_t titleW = getTextWidth(title);
+ 
+     // Center the block
 diff --git a/src/main.cpp b/src/main.cpp
-index 9e46021c9..2eaf69125 100644
+index d49111414..2a9dfadd7 100644
 --- a/src/main.cpp
 +++ b/src/main.cpp
-@@ -397,7 +397,7 @@ void setup()
+@@ -433,7 +433,7 @@ void setup()
      powerMonInit();
      serialSinceMsec = millis();
  
