@@ -90,16 +90,21 @@ index ade44ab65..3ae46ca23 100644
      uint16_t titleW = getTextWidth(title);
  
      // Center the block
+
 diff --git a/src/main.cpp b/src/main.cpp
-index d49111414..2a9dfadd7 100644
+index c65482292..ad1c60250 100644
 --- a/src/main.cpp
 +++ b/src/main.cpp
-@@ -433,7 +433,7 @@ void setup()
+@@ -434,10 +434,10 @@ void setup()
      powerMonInit();
      serialSinceMsec = millis();
  
 -    LOG_INFO("\n\n//\\ E S H T /\\ S T / C\n");
 +    LOG_INFO("\n\nL O R A I T A L I A\n");
  
-     initDeepSleep();
- 
+ #if defined(DEBUG_MUTE) && defined(DEBUG_PORT)
+-    DEBUG_PORT.printf("\r\n\r\n//\\ E S H T /\\ S T / C\r\n");
++    DEBUG_PORT.printf("\r\n\r\nL O R A I T A L I A\r\n");
+     DEBUG_PORT.printf("Version %s for %s from %s\r\n", optstr(APP_VERSION), optstr(APP_ENV), optstr(APP_REPO));
+     DEBUG_PORT.printf("Debug mute is enabled, there will be no serial output.\r\n");
+ #endif

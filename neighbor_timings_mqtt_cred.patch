@@ -1,5 +1,5 @@
 diff --git a/src/mesh/Default.h b/src/mesh/Default.h
-index 2f05da98d..f1f961675 100644
+index 218d8d0fb..7e10cb3d0 100644
 --- a/src/mesh/Default.h
 +++ b/src/mesh/Default.h
 @@ -20,9 +20,9 @@
@@ -14,9 +14,9 @@ index 2f05da98d..f1f961675 100644
  #define default_map_publish_interval_secs 60 * 60
  #ifdef USERPREFS_RINGTONE_NAG_SECS
  #define default_ringtone_nag_secs USERPREFS_RINGTONE_NAG_SECS
-@@ -30,9 +30,9 @@
- #define default_ringtone_nag_secs 60
+@@ -31,9 +31,9 @@
  #endif
+ #define default_network_ipv6_enabled false
  
 -#define default_mqtt_address "mqtt.meshtastic.org"
 -#define default_mqtt_username "meshdev"

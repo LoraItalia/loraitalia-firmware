@@ -1,10 +1,10 @@
 diff --git a/src/modules/AdminModule.cpp b/src/modules/AdminModule.cpp
-index 7906b410..c202e183 100644
+index d300ff53b..ebe35c35e 100644
 --- a/src/modules/AdminModule.cpp
 +++ b/src/modules/AdminModule.cpp
-@@ -605,7 +605,8 @@ void AdminModule::handleSetConfig(const meshtastic_Config &c)
-                 config.lora.ignore_mqtt = true; // Ignore MQTT by default if region has a duty cycle limit
+@@ -784,7 +784,8 @@ void AdminModule::handleSetConfig(const meshtastic_Config &c)
              }
+             //  Compare the entire string, we are sure of the length as a topic has never been set
              if (strcmp(moduleConfig.mqtt.root, default_mqtt_root) == 0) {
 -                sprintf(moduleConfig.mqtt.root, "%s/%s", default_mqtt_root, myRegion->name);
 +                const char *ownerId = owner.id + 1;
@@ -12,3 +12,13 @@ index 7906b410..c202e183 100644
                  changes = SEGMENT_CONFIG | SEGMENT_MODULECONFIG;
              }
          }
+@@ -795,7 +796,8 @@ void AdminModule::handleSetConfig(const meshtastic_Config &c)
+ 
+             if (strncmp(moduleConfig.mqtt.root, default_mqtt_root, strlen(default_mqtt_root)) == 0) {
+                 //  Default root is in use, so subscribe to the appropriate MQTT topic for this region
+-                sprintf(moduleConfig.mqtt.root, "%s/%s", default_mqtt_root, myRegion->name);
++                const char *ownerId = owner.id + 1;
+++               sprintf(moduleConfig.mqtt.root, "%s/%s/%s", default_mqtt_root, myRegion->name, ownerId);
+             }
+ 
+             changes = SEGMENT_CONFIG | SEGMENT_MODULECONFIG;

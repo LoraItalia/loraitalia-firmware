@@ -1,0 +1,13 @@
+diff --git a/bin/platformio-custom.py b/bin/platformio-custom.py
+index 4a1887d9d..65374accc 100644
+--- a/bin/platformio-custom.py
++++ b/bin/platformio-custom.py
+@@ -133,7 +133,7 @@ build_epoch = int(current_date.timestamp())
+ 
+ flags = [
+         "-DAPP_VERSION=" + verObj["long"],
+-        "-DAPP_VERSION_SHORT=" + verObj["short"],
++        "-DAPP_VERSION_SHORT=" + verObj["short"][:17],
+         "-DAPP_ENV=" + env.get("PIOENV"),
+         "-DAPP_REPO=" + repo_owner,
+         "-DBUILD_EPOCH=" + str(build_epoch),
