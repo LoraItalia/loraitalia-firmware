@@ -52,6 +52,7 @@ heltec-v1
 heltec-v2_1
 heltec-v2_0
 heltec-v3
+heltec-v4
 heltec-vision-master-e213
 heltec-vision-master-e213-inkhud
 heltec-vision-master-e290
