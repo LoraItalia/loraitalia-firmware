@@ -1,8 +1,8 @@
 diff --git a/src/graphics/draw/NotificationRenderer.cpp b/src/graphics/draw/NotificationRenderer.cpp
-index 26bfe8447..cbdfd2ae3 100644
+index 8d76b4592..debf90602 100644
 --- a/src/graphics/draw/NotificationRenderer.cpp
 +++ b/src/graphics/draw/NotificationRenderer.cpp
-@@ -726,7 +726,7 @@ void NotificationRenderer::drawCriticalFaultFrame(OLEDDisplay *display, OLEDDisp
+@@ -676,7 +676,7 @@ void NotificationRenderer::drawCriticalFaultFrame(OLEDDisplay *display, OLEDDisp
      display->drawString(0 + x, 0 + y, tempBuf);
      display->setTextAlignment(TEXT_ALIGN_LEFT);
      display->setFont(FONT_SMALL);
@@ -12,10 +12,10 @@ index 26bfe8447..cbdfd2ae3 100644
  
  void NotificationRenderer::drawFrameFirmware(OLEDDisplay *display, OLEDDisplayUiState *state, int16_t x, int16_t y)
 diff --git a/src/graphics/draw/UIRenderer.cpp b/src/graphics/draw/UIRenderer.cpp
-index ff8cd20c5..82c47be8e 100644
+index 7ce9d5afe..fdb57be23 100644
 --- a/src/graphics/draw/UIRenderer.cpp
 +++ b/src/graphics/draw/UIRenderer.cpp
-@@ -956,7 +956,7 @@ void UIRenderer::drawIconScreen(const char *upperMsg, OLEDDisplay *display, OLED
+@@ -942,7 +942,7 @@ void UIRenderer::drawIconScreen(const char *upperMsg, OLEDDisplay *display, OLED
  
      display->setFont(FONT_MEDIUM);
      display->setTextAlignment(TEXT_ALIGN_LEFT);
@@ -69,19 +69,19 @@ index 4e78ae8a1..d1e02ef06 100644
  #endif
 \ No newline at end of file
 diff --git a/src/graphics/niche/InkHUD/Applets/System/Tips/TipsApplet.cpp b/src/graphics/niche/InkHUD/Applets/System/Tips/TipsApplet.cpp
-index ade44ab65..3ae46ca23 100644
+index 6cac2644b..e8515f0d9 100644
 --- a/src/graphics/niche/InkHUD/Applets/System/Tips/TipsApplet.cpp
 +++ b/src/graphics/niche/InkHUD/Applets/System/Tips/TipsApplet.cpp
-@@ -73,7 +73,7 @@ void InkHUD::TipsApplet::onRender()
-         }
+@@ -77,7 +77,7 @@ void InkHUD::TipsApplet::onRender(bool full)
+             drawBullet("- set timezone");
  
-         cursorY += fontSmall.lineHeight() * 1.5;
--        printAt(0, cursorY, "More info at meshtastic.org");
-+        printAt(0, cursorY, "More info at loraitalia.it");
+         cursorY += fontSmall.lineHeight() / 2;
+-        drawBullet("More info at meshtastic.org");
++        drawBullet("More info at loraitalia.it");
  
-         setFont(fontSmall);
          printAt(0, Y(1.0), "Press button to continue", LEFT, BOTTOM);
-@@ -158,7 +158,7 @@ void InkHUD::TipsApplet::renderWelcome()
+     } break;
+@@ -215,7 +215,7 @@ void InkHUD::TipsApplet::renderWelcome()
      setFont(fontMedium);
      std::string title;
      if (width() >= 200) // Future proofing: hide if *tiny* display
@@ -90,17 +90,21 @@ index ade44ab65..3ae46ca23 100644
      uint16_t titleW = getTextWidth(title);
  
      // Center the block
-
 diff --git a/src/main.cpp b/src/main.cpp
-index c65482292..ad1c60250 100644
+index 44885813e..b15517e49 100644
 --- a/src/main.cpp
 +++ b/src/main.cpp
-@@ -434,10 +434,10 @@ void setup()
+@@ -389,7 +389,7 @@ void setup()
      powerMonInit();
      serialSinceMsec = millis();
  
 -    LOG_INFO("\n\n//\\ E S H T /\\ S T / C\n");
 +    LOG_INFO("\n\nL O R A I T A L I A\n");
+ 
+ #if defined(ARCH_ESP32) && defined(BOARD_HAS_PSRAM)
+ #ifndef SENSECAP_INDICATOR
+@@ -399,7 +399,7 @@ void setup()
+ #endif
  
  #if defined(DEBUG_MUTE) && defined(DEBUG_PORT)
 -    DEBUG_PORT.printf("\r\n\r\n//\\ E S H T /\\ S T / C\r\n");

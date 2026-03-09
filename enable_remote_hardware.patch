@@ -1,11 +1,11 @@
 diff --git a/platformio.ini b/platformio.ini
-index a5a23e56f..91b32be2d 100644
+index b7123b865..070da3401 100644
 --- a/platformio.ini
 +++ b/platformio.ini
-@@ -48,7 +48,7 @@ build_flags = -Wno-missing-field-initializers
- 	-DRADIOLIB_EXCLUDE_APRS=1
+@@ -51,7 +51,7 @@ build_flags = -Wno-missing-field-initializers
  	-DRADIOLIB_EXCLUDE_LORAWAN=1
  	-DMESHTASTIC_EXCLUDE_DROPZONE=1
+ 	-DMESHTASTIC_EXCLUDE_REPLYBOT=1
 -	-DMESHTASTIC_EXCLUDE_REMOTEHARDWARE=1
 +	-DMESHTASTIC_EXCLUDE_REMOTEHARDWARE=0
  	-DMESHTASTIC_EXCLUDE_HEALTH_TELEMETRY=1

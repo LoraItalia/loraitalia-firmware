@@ -1,15 +1,16 @@
-diff --git a/src/main.cpp b/src/main.cpp
-index 7a11ca2e0..16a360353 100644
---- a/src/main.cpp
-+++ b/src/main.cpp
-@@ -282,8 +282,10 @@ static int32_t ledBlinker()
- {
-     // Still set up the blinking (heartbeat) interval but skip code path below, so LED will blink if
-     // config.device.led_heartbeat_disabled is changed
-+    #ifndef MESHLINK
-     if (config.device.led_heartbeat_disabled)
-         return 1000;
-+    #endif
+diff --git a/src/modules/StatusLEDModule.cpp b/src/modules/StatusLEDModule.cpp
+index 7acf750c2..edf2de49c 100644
+--- a/src/modules/StatusLEDModule.cpp
++++ b/src/modules/StatusLEDModule.cpp
+@@ -124,9 +124,11 @@ int32_t StatusLEDModule::runOnce()
+     }
  
-     static bool ledOn;
-     ledOn ^= 1;
+     // Override if disabled in config
++    #ifndef MESHLINK
+     if (config.device.led_heartbeat_disabled) {
+         CHARGE_LED_state = LED_STATE_OFF;
+     }
++    #endif
+ #ifdef Battery_LED_1
+     bool chargeIndicatorLED1 = LED_STATE_OFF;
+     bool chargeIndicatorLED2 = LED_STATE_OFF;
