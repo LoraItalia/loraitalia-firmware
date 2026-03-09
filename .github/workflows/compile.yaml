@@ -8,6 +8,7 @@ on:
         required: true
         type: choice
         options:
+        - v2.7.19.bb3d6d5
         - v2.7.15.567b8ea
         - v2.7.13.597fa0b
         - v2.7.11.ee68575
