@@ -1,8 +1,8 @@
 diff --git a/src/mesh/Default.h b/src/mesh/Default.h
-index 218d8d0fb..7e10cb3d0 100644
+index f4633790e..3289baa38 100644
 --- a/src/mesh/Default.h
 +++ b/src/mesh/Default.h
-@@ -20,9 +20,9 @@
+@@ -26,9 +26,9 @@
  #define default_min_wake_secs 10
  #define default_screen_on_secs IF_ROUTER(1, 60 * 10)
  #define default_node_info_broadcast_secs 3 * 60 * 60
@@ -12,9 +12,9 @@ index 218d8d0fb..7e10cb3d0 100644
 -#define min_neighbor_info_broadcast_secs 4 * 60 * 60
 +#define min_neighbor_info_broadcast_secs 1 * 60 * 60
  #define default_map_publish_interval_secs 60 * 60
- #ifdef USERPREFS_RINGTONE_NAG_SECS
- #define default_ringtone_nag_secs USERPREFS_RINGTONE_NAG_SECS
-@@ -31,9 +31,9 @@
+ 
+ // Traffic management defaults
+@@ -42,9 +42,9 @@
  #endif
  #define default_network_ipv6_enabled false
  
