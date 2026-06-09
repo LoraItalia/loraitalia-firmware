@@ -1,14 +1,24 @@
 diff --git a/src/modules/AdminModule.cpp b/src/modules/AdminModule.cpp
-index 05bc0aa5d..8b4c8d70a 100644
+index 6c8438bbb..4a06868e7 100644
 --- a/src/modules/AdminModule.cpp
 +++ b/src/modules/AdminModule.cpp
-@@ -823,7 +823,8 @@ void AdminModule::handleSetConfig(const meshtastic_Config &c, bool fromOthers)
-                 }
-                 if (strncmp(moduleConfig.mqtt.root, default_mqtt_root, strlen(default_mqtt_root)) == 0) {
-                     //  Default root is in use, so subscribe to the appropriate MQTT topic for this region
--                    sprintf(moduleConfig.mqtt.root, "%s/%s", default_mqtt_root, myRegion->name);
-+                    const char *ownerId = owner.id + 1;
-++                   sprintf(moduleConfig.mqtt.root, "%s/%s/%s", default_mqtt_root, myRegion->name, ownerId);
-                 }
+@@ -842,7 +842,8 @@ void AdminModule::handleSetConfig(const meshtastic_Config &c)
+             }
+             //  Compare the entire string, we are sure of the length as a topic has never been set
+             if (strcmp(moduleConfig.mqtt.root, default_mqtt_root) == 0) {
+-                sprintf(moduleConfig.mqtt.root, "%s/%s", default_mqtt_root, myRegion->name);
++                const char *ownerId = owner.id + 1;
++                sprintf(moduleConfig.mqtt.root, "%s/%s/%s", default_mqtt_root, myRegion->name, ownerId);
                  changes = SEGMENT_CONFIG | SEGMENT_MODULECONFIG;
-             } else {
+             }
+         }
+@@ -853,7 +854,8 @@ void AdminModule::handleSetConfig(const meshtastic_Config &c)
+ 
+             if (strncmp(moduleConfig.mqtt.root, default_mqtt_root, strlen(default_mqtt_root)) == 0) {
+                 //  Default root is in use, so subscribe to the appropriate MQTT topic for this region
+-                sprintf(moduleConfig.mqtt.root, "%s/%s", default_mqtt_root, myRegion->name);
++                const char *ownerId = owner.id + 1;
++                sprintf(moduleConfig.mqtt.root, "%s/%s/%s", default_mqtt_root, myRegion->name, ownerId);
+             }
+ 
+             changes = SEGMENT_CONFIG | SEGMENT_MODULECONFIG;
