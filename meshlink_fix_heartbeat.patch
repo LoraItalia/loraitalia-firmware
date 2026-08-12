@@ -1,16 +1,17 @@
 diff --git a/src/modules/StatusLEDModule.cpp b/src/modules/StatusLEDModule.cpp
-index 7acf750c2..edf2de49c 100644
+index 353317d25..5d06cc08e 100644
 --- a/src/modules/StatusLEDModule.cpp
 +++ b/src/modules/StatusLEDModule.cpp
-@@ -124,9 +124,11 @@ int32_t StatusLEDModule::runOnce()
-     }
+@@ -182,9 +182,12 @@ int32_t StatusLEDModule::runOnce()
+ #endif
  
      // Override if disabled in config
-+    #ifndef MESHLINK
++#ifndef MESHLINK
      if (config.device.led_heartbeat_disabled) {
          CHARGE_LED_state = LED_STATE_OFF;
      }
-+    #endif
++#endif
++
  #ifdef Battery_LED_1
      bool chargeIndicatorLED1 = LED_STATE_OFF;
      bool chargeIndicatorLED2 = LED_STATE_OFF;
